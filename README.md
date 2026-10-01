@@ -1,205 +1,109 @@
-# Awesome-Data-Virtualization
-
-## Top Data Virtualization Platforms Ecosystem
-
-
-
-**Curated List of SaaS Products & Open-Source GitHub Projects**
-
-*Focused on Data Federation, Virtual Views, Semantic Layers & Cross-Source Query Engines*
-
-**Last updated: September 2026**
-
-
-
-This repository tracks notable **SaaS platforms** and **open-source projects** for **Data Virtualization**. These tools help organizations query data across disparate sources—databases, data lakes, warehouses, APIs—without physically moving or copying it, presenting a unified logical view for analytics and applications.
-
-
-
-**Examples** include Denodo, Dremio, CData Virtuality, TIBCO Data Virtualization, Starburst, IBM Cloud Pak for Data, Cisco Information Server, AtScale, and Red Hat Data Virtualization (the category leaders).
-
-
-
-**Open-source emphasis**: Data virtualization has a **mature and production-proven open-source ecosystem**. **Trino** is the de facto standard for distributed federated SQL, powering Starburst's commercial platform . **Teiid** (319 stars) provides a robust data virtualization system for heterogeneous data stores . **DVT (Data Virtualization Tool)** extends dbt Core with cross-engine federation using DuckDB as a local compute engine . **Apache Calcite** provides the query planning and optimization foundation. This section documents these production-grade solutions.
-
-
-
-Contributions welcome! Open a PR to add/update entries. Keep descriptions factual and link to official sites.
-
-
-
-## Table of Contents
-
-
-
-- [SaaS/Hosted Platforms](#saas-hosted-platforms)
-
-- [Open-Source GitHub Projects](#open-source-github-projects)
-
-- [How to Contribute](#how-to-contribute)
-
-- [Disclaimer](#disclaimer)
-
-
-
-## SaaS/Hosted Platforms
-
-
-
-- **[Denodo](https://www.denodo.com/)**  
-
-  The leading enterprise data virtualization platform. Provides logical data warehouse, data fabric, and data services capabilities across 200+ data sources. Known for its query optimization engine and metadata layer for unified governance .
-
-
-
-- **[Dremio](https://www.dremio.com/)**  
-
-  Cloud-native lakehouse platform with zero-ETL data federation. Provides virtual datasets (VDS) that query data across S3, ADLS, GCS, databases, and file systems without copying. Uses Apache Arrow-based engine with **Autonomous Reflections** for automatic query acceleration . Supports Apache Iceberg natively. **Community Edition** free for self-managed deployment; Cloud from $0.20/credit with $400 monthly option .
-
-
-
-- **[Starburst](https://www.starburst.io/)**  
-
-  Enterprise platform built on **Trino** (open-source distributed SQL engine). Federates queries across data lakes, warehouses, and databases with enterprise security, cost controls, and **Warp Speed** caching. 50+ connectors. Credit-based pricing: Pro $0.50, Enterprise $0.75, Mission-Critical $1.00 per credit .
-
-
-
-- **[CData Virtuality](https://www.cdata.com/)**  
-
-  Data virtualization and integration platform. Provides real-time access to 200+ data sources through a unified SQL interface with advanced query optimization.
-
-
-
-- **[TIBCO Data Virtualization](https://www.tibco.com/)**  
-
-  Enterprise data virtualization platform. Provides unified data access, federation, and delivery across disparate sources with metadata management.
-
-
-
-- **[IBM Cloud Pak for Data](https://www.ibm.com/)**  
-
-  Data and AI platform with data virtualization capabilities. Provides unified access to data across hybrid cloud environments.
-
-
-
-- **[AtScale](https://www.atscale.com/)**  
-
-  Semantic layer platform with virtual OLAP cubes. Provides aggregate awareness rewriting queries against pre-computed rollups. SML (Semantic Modeling Language) open-sourced under Apache in September 2024. Pricing: $10–28 per deployed semantic object per month, floors $2,500–7,000/mo .
-
-
-
-- **[Red Hat Data Virtualization](https://www.redhat.com/)**  
-
-  Enterprise data virtualization based on Teiid. Provides unified data access across heterogeneous sources with JBoss-based deployment.
-
-
-
-## Open-Source GitHub Projects
-
-
-
-### Distributed Query Engines
-
-
-
-- **[Trino](https://github.com/trinodb/trino)**  
-
-  **The de facto standard open-source distributed SQL query engine for data virtualization.** **Apache-2.0 licensed** . Federates queries across S3/GCS/ADLS, databases, and warehouses without copying data. Powers **Starburst's commercial platform** . **Key capabilities**: 50+ connectors; ANSI SQL support; interactive query performance on Iceberg/Delta/Hudi; JDBC/ODBC drivers. **Tradeoffs**: Requires DevOps capability for self-management; cold data can be slow; poorly structured lakes become performance traps . **Genuinely viable** for teams with strong engineering.
-
-
-
-- **[Teiid](https://github.com/teiid/teiid)**  
-
-  **Open-source data virtualization system for heterogeneous data stores.** **319 stars, 233 forks** . Allows applications to use data from multiple, heterogeneous data stores through a unified SQL interface . **Note**: Repository shows low recent activity (0 commits in last 90 days per OpenSSF scorecard), suggesting project is in maintenance mode . Use with caution for new deployments.
-
-
-
-### dbt-Based Virtualization
-
-
-
-- **[DVT (Data Virtualization Tool)](https://github.com/dvt-io/dvt-core)**  
-
-  **Cross-engine data transformation built on dbt.** **MIT licensed**, published on PyPI as `dvt-core` . **Core innovation**: Write SQL models that **JOIN tables living on different database engines** — MySQL with Snowflake, Oracle with PostgreSQL, anything with anything — and DVT handles extraction, federation, and loading automatically . **Architecture**: Wrapper around stock dbt-core; dbt runs standard models; DVT picks up models dbt can't express (cross-engine `f_table` and `.py` models) and runs them through its own pipeline: decompose → transpile/pushdown → extract (Sling → Parquet, parallel) → compute (DuckDB joins locally) → load . **Sling direct path**: When all sources share one connection, whole query transpiled and streamed directly — no staging . **Install**: `pip install dvt-core`.
-
-
-
-### Semantic Layer
-
-
-
-- **[Cube Core](https://github.com/cube-js/cube)**  
-
-  **Open-source headless BI and semantic layer.** **Apache-2.0 (backend) / MIT (clients)** . Engineers author YAML or JavaScript data models; Cube exposes them as **REST, GraphQL, and SQL APIs** with a serious caching and pre-aggregation engine . **Use case**: Sub-second responses at concurrency; embedded analytics; data products. **Pricing**: OSS free; Cube Cloud separate .
-
-
-
-- **[OrionBelt Semantic Layer](https://github.com/ralforion/orionbelt-semantic-layer)**  
-
-  **Open-source semantic sidecar compiling YAML models to optimized SQL across 8 engines.** **BSL-1.1 licensed**, v2.7.6, active (May 2026) . **Supported engines**: BigQuery, ClickHouse, Databricks, Dremio, DuckDB, MySQL, PostgreSQL, Snowflake . **Connection surfaces**: REST API (FastAPI/OpenAPI), **Arrow Flight SQL** (JDBC/ODBC/Python), **Postgres wire protocol** (any psql/BI tool) . **2,300+ tests**, full CI, multi-dialect drift snapshots. **MCP server** for AI assistants .
-
-
-
-- **[Ontop](https://github.com/ontop/ontop)**  
-
-  **Virtual Knowledge Graph engine for data virtualization.** **Apache-2.0 licensed** . Reformulates SPARQL queries into source queries (KG virtualization) without materializing RDF. **Supported federators**: **Dremio, Denodo, Apache Spark, Trino/Athena** . Enables hybrid KG solutions with virtual and materialized data. Integrates with **GraphDB 9.5** for data virtualization over relational sources .
-
-
-
-### Additional Strong Open-Source Options
-
-
-
-- **Distributed Query**: **Trino** (de facto standard, powers Starburst), **Teiid** (heterogeneous stores, maintenance mode) .
-
-- **dbt-Based**: **DVT** (cross-engine federation, DuckDB compute, MIT) .
-
-- **Semantic Layer**: **Cube Core** (headless BI, REST/GraphQL/SQL), **OrionBelt** (8 engines, Arrow Flight SQL, Postgres wire) .
-
-- **Knowledge Graph**: **Ontop** (SPARQL-to-SQL, supports Dremio/Denodo/Trino) .
-
-- **Lightweight Federation**: **Duckle** (local-first ETL, DuckDB, complements Dremio/Snowflake) .
-
-
-
-**Frameworks for building custom systems**: Combine **Trino** for distributed federated SQL across data lakes and databases, **DVT** for cross-engine dbt transformations with local DuckDB compute, **Cube Core** or **OrionBelt** for semantic layer and metrics APIs, and **Ontop** for virtual knowledge graphs over relational sources. Add **PostgreSQL** for metadata persistence and **Docker** for deployment.
-
-
-
-## How to Contribute
-
-
-
-1. Fork the repo.
-
-2. Add/edit entries in `README.md` (follow existing format).
-
-3. Include: name, link, 1–2 sentence description, and whether it's SaaS or open-source.
-
-4. Submit PR with a short explanation.
-
-
-
-Star the repo if you find it useful!
-
-
-
-## Disclaimer
-
-
-
-- This is a **community-curated** list — not exhaustive and not an endorsement.
-
-- Data virtualization platforms handle sensitive production data; ensure proper access controls, query governance, and compliance with data protection regulations.
-
-- **Open-source reality**: The open-source ecosystem for data virtualization is **mature at the distributed query layer** (**Trino**) and **developing at the semantic layer** (**Cube Core**, **OrionBelt**). **DVT** provides a novel approach to cross-engine federation using dbt and DuckDB . **Teiid** was historically significant but shows low recent activity . However, **commercial platforms** (Denodo, Dremio, Starburst, AtScale) provide **managed infrastructure, advanced query optimization (Reflections, Warp Speed), enterprise governance, and dedicated support** that open-source alternatives require significant operational investment to match. The open-source path is **genuinely viable** for organizations with strong data platform engineering capacity.
-
-
+# ⚡ Awesome Data Virtualization
+
+<p align="center">
+  <img src="assets/banner.svg" alt="Awesome Data Virtualization Banner" width="100%" />
+</p>
+
+<p align="center">
+  <a href="https://github.com/ishandutta2007/Awesome-Awesome-Awesome"><img src="https://img.shields.io/badge/Awesome-%E2%9C%94-blueviolet?style=flat-square&logo=github" alt="Awesome"/></a>
+  <a href="https://discord.gg/jc4xtF58Ve"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" /></a>
+  <a href="https://github.com/ishandutta2007/Awesome-Data-Virtualization"><img src="https://img.shields.io/github/stars/ishandutta2007/Awesome-Data-Virtualization?style=social" alt="GitHub Stars" /></a>
+  <a href="https://github.com/ishandutta2007/Awesome-Data-Virtualization/fork"><img src="https://img.shields.io/github/forks/ishandutta2007/Awesome-Data-Virtualization?style=social" alt="GitHub Forks" /></a>
+  <a href="https://github.com/ishandutta2007"><img alt="GitHub followers" src="https://img.shields.io/github/followers/ishandutta2007?label=Follow" /></a>
+</p>
+
+> 🚀 **Curated Ecosystem of Enterprise Data Virtualization Platforms, Distributed Federated SQL Query Engines & Semantic Layers**
+> 
+> *A comprehensive guide for data engineers, analytics architects, and platform leads to query across disparate databases, data lakes, and SaaS applications in real time without ETL data movement.*
 
 ---
 
+## 📚 Table of Contents
+- [🌐 Market Overview & Insights](#-market-overview--insights)
+- [🏢 SaaS & Hosted Platforms](#-saas--hosted-platforms)
+- [🔓 Open-Source GitHub Projects](#-open-source-github-projects)
+- [📈 Star History](#-star-history)
+- [🤝 How to Contribute](#-how-to-contribute)
+- [💖 Support & Sponsorship](#-support--sponsorship)
+- [⚠️ Disclaimer](#%EF%B8%8F-disclaimer)
 
+---
 
-**Made for data engineers, analytics architects, platform teams, and data platform leads.**
+## 🌐 Market Overview & Insights
 
-Let's make data virtualization more open, transparent, and federated.
+> 💡 **Market Size & Structure**: The global Data Virtualization market is estimated at **$4.8 Billion (2025–2026)** and is projected to reach **$12.5 Billion+ by 2030** with a rapid **CAGR of ~16.5%**. 
+> 
+> The sector is **moderately fragmented**: While cloud infrastructure query execution is heavily influenced by major hyperscalers, the specialized data virtualization, semantic layer, and logical data fabric layer feature intense competition between enterprise incumbents (Denodo, IBM, TIBCO) and modern cloud-native platforms (Dremio, Starburst, CData).
+
+---
+
+## 🏢 SaaS & Hosted Platforms
+
+The table below lists top enterprise data virtualization platforms sorted by company scale (Revenue / Valuation):
+
+| Platform | Description | Pricing / Starting Tier | Free Tier / Free Trial Limits | Scale (Revenue / Valuation) |
+| :--- | :--- | :--- | :--- | :--- |
+| **[IBM Cloud Pak for Data](https://www.ibm.com/)** 🏢 | Hybrid cloud data & AI platform with built-in Enterprise Data Virtualization engine across multi-cloud stores. | From **$1,000 / month** (pay-as-you-go capacity units) | **30-day Free Trial** (IBM Cloud Lite tier with 10,000 free processing credits) | **~$62 Billion** Annual Revenue |
+| **[TIBCO Data Virtualization](https://www.tibco.com/)** 🏛️ | Enterprise data virtualization platform for unified real-time data access across heterogeneous data sources. | From **$2,500 / month** (estimated core subscription) | **30-day Free Trial** (Available via sales/partner environment evaluation) | **~$17 Billion** Parent Valuation (Cloud Software Group merger) |
+| **[Starburst](https://www.starburst.io/)** 🚀 | Enterprise federated SQL platform built on Trino with Warp Speed query acceleration and enterprise security. | From **$0.50 / credit** (~$500/mo base usage) | **$500 Free Credits** on Starburst Galaxy (valid for 30 days) | **~$1.2 Billion** Valuation |
+| **[CData Virtuality](https://www.cdata.com/)** 🔌 | Enterprise data virtualization & real-time integration suite delivering unified SQL views for 200+ sources. | From **$499 / month** (Standard Cloud instance) | **30-day Free Trial** (Full featured platform access) | **~$800 Million** Valuation |
+| **[Dremio](https://www.dremio.com/)** ❄️ | Cloud-native lakehouse & zero-ETL data virtualization platform with Apache Arrow Reflections acceleration. | From **$0.20 / Dremio credit** ($400/mo minimum) | **Free Forever Community Edition** (Self-managed deployment) / **$400 Free Cloud Credits** | **~$1.0 Billion** Valuation |
+| **[Denodo](https://www.denodo.com/)** 👑 | Market leader in logical data warehouse and data fabric virtualization across 200+ enterprise connectors. | From **$6.27 / hour** (Azure/AWS Marketplace instance) | **Free Forever Developer Tier** (Single developer workspace) & **30-day Free Trial** | **~$300 Million** Annual Revenue |
+| **[AtScale](https://www.atscale.com/)** 📊 | Enterprise semantic layer & virtual OLAP cube engine providing dynamic aggregate awareness and SQL/MDX access. | From **$2,500 / month** ($10-$28 per deployed semantic object) | **14-day Free Trial** (Interactive sandbox environment) | **~$100 Million** Valuation |
+
+---
+
+## 🔓 Open-Source GitHub Projects
+
+Curated open-source query engines, federated SQL frameworks, and semantic layer engines sorted by GitHub Stars:
+
+| Project | Description | GitHub Stars | License |
+| :--- | :--- | :--- | :--- |
+| 🦆 **[DuckDB](https://github.com/duckdb/duckdb)** | In-process analytical SQL database engine optimized for fast local compute, zero-copy querying, and cross-engine data federation. | [![Stars](https://img.shields.io/github/stars/duckdb/duckdb?style=social&color=white)](https://github.com/duckdb/duckdb/stargazers) | MIT |
+| 🧊 **[Cube Core](https://github.com/cube-js/cube)** | Headless BI and semantic layer platform exposing unified data models over REST, GraphQL, and SQL Postgres wire protocols. | [![Stars](https://img.shields.io/github/stars/cube-js/cube?style=social&color=white)](https://github.com/cube-js/cube/stargazers) | Apache-2.0 / MIT |
+| 🚀 **[Presto](https://github.com/prestodb/presto)** | Distributed SQL query engine for big data and federated analytics across multi-cloud data lakes and warehouses. | [![Stars](https://img.shields.io/github/stars/prestodb/presto?style=social&color=white)](https://github.com/prestodb/presto/stargazers) | Apache-2.0 |
+| ⚡ **[Trino](https://github.com/trinodb/trino)** | De facto standard open-source distributed SQL query engine for high-performance data virtualization and federation. | [![Stars](https://img.shields.io/github/stars/trinodb/trino?style=social&color=white)](https://github.com/trinodb/trino/stargazers) | Apache-2.0 |
+| 🔥 **[Apache DataFusion](https://github.com/apache/datafusion)** | Extensible Rust-based in-memory query engine substrate designed for building custom data virtualization and SQL federators. | [![Stars](https://img.shields.io/github/stars/apache/datafusion?style=social&color=white)](https://github.com/apache/datafusion/stargazers) | Apache-2.0 |
+| 💎 **[Apache Calcite](https://github.com/apache/calcite)** | Dynamic data management framework providing query optimization, SQL parsing, and relational algebra planning foundation. | [![Stars](https://img.shields.io/github/stars/apache/calcite?style=social&color=white)](https://github.com/apache/calcite/stargazers) | Apache-2.0 |
+| 🌐 **[Apache DataFusion Ballista](https://github.com/apache/datafusion-ballista)** | Distributed compute platform built on Apache DataFusion and Rust for federated SQL query execution over data nodes. | [![Stars](https://img.shields.io/github/stars/apache/datafusion-ballista?style=social&color=white)](https://github.com/apache/datafusion-ballista/stargazers) | Apache-2.0 |
+| 🛠️ **[Apache Drill](https://github.com/apache/drill)** | Schema-free SQL query engine for big data enabling real-time ad-hoc federation across NoSQL databases and file systems. | [![Stars](https://img.shields.io/github/stars/apache/drill?style=social&color=white)](https://github.com/apache/drill/stargazers) | Apache-2.0 |
+| 🕸️ **[Ontop](https://github.com/ontop/ontop)** | Virtual Knowledge Graph (VKG) engine reformulating SPARQL queries into virtual SQL views over relational data sources. | [![Stars](https://img.shields.io/github/stars/ontop/ontop?style=social&color=white)](https://github.com/ontop/ontop/stargazers) | Apache-2.0 |
+| 🧬 **[Teiid](https://github.com/teiid/teiid)** | Enterprise data virtualization system providing heterogeneous data store abstraction and unified relational access. | [![Stars](https://img.shields.io/github/stars/teiid/teiid?style=social&color=white)](https://github.com/teiid/teiid/stargazers) | Apache-2.0 |
+| 🌌 **[OrionBelt Semantic Layer](https://github.com/ralforion/orionbelt-semantic-layer)** | Semantic layer engine compiling YAML models into optimized SQL across 8 engines via Arrow Flight SQL and Postgres wire. | [![Stars](https://img.shields.io/github/stars/ralforion/orionbelt-semantic-layer?style=social&color=white)](https://github.com/ralforion/orionbelt-semantic-layer/stargazers) | BSL-1.1 |
+| 🔀 **[DVT (Data Virtualization Tool)](https://github.com/dvt-io/dvt-core)** | Cross-engine dbt transformation framework enabling SQL models to join tables residing on separate database engines using DuckDB compute. | [![Stars](https://img.shields.io/github/stars/dvt-io/dvt-core?style=social&color=white)](https://github.com/dvt-io/dvt-core/stargazers) | MIT |
+
+---
+
+## 📈 Star History
+
+[![Star History Chart](https://star-history.dera.page/svg?repos=ishandutta2007/Awesome-Data-Virtualization&type=date&legend=top-left)](https://star-history.dera.page/#ishandutta2007/Awesome-Data-Virtualization&type=date&legend=top-left)
+
+---
+
+## 🤝 How to Contribute
+
+Contributions are welcome! Please follow these simple guidelines:
+
+1. 🍴 **Fork the Repository**
+2. 📝 **Add or Update Entries**: Maintain factual descriptions, official documentation links, and proper formatting.
+3. 🔬 **Verify Links & Licensing**: Ensure all open-source repositories and SaaS URLs are valid.
+4. 📬 **Submit a Pull Request**: Provide a brief explanation of your additions or edits.
+
+---
+
+## 💖 Support & Sponsorship
+
+If you find this curated list valuable for your data engineering work or platform evaluations:
+
+- ⭐ **Star this repository** to show support!
+- 🔀 **Fork it** to customize your own evaluation matrix.
+- 📣 **Share it** with fellow data architects and platform engineers.
+- ☕ **Buy me a coffee**: If you'd like to sponsor the maintenance of this repository, consider supporting via [GitHub Sponsors](https://github.com/sponsors/ishandutta2007).
+
+---
+
+## ⚠️ Disclaimer
+
+- This is a **community-curated list** intended for educational and informational purposes — not an official endorsement.
+- Data Virtualization platforms handle sensitive enterprise infrastructure; always enforce strict data governance, access controls, and encryption standards.
+- Market valuations, star counts, and pricing models are subject to vendor adjustments and community updates.
