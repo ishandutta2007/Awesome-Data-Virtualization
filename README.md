@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://github.com/ishandutta2007/Awesome-Awesome-Awesome"><img src="https://img.shields.io/badge/Awesome-%E2%9C%94-blueviolet?style=flat-square&logo=github" alt="Awesome"/></a>
   <a href="https://discord.gg/jc4xtF58Ve"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" /></a>
-  <a href="https://github.com/ishandutta2007/Awesome-Data-Virtualization"><img src="https://img.shields.io/github/stars/ishandutta2007/Awesome-Data-Virtualization?style=social" alt="GitHub Stars" /></a>
+  <a href="https://github.com/ishandutta2007/Awesome-Data-Virtualization"><img src="https://img.shields.io/github/stars/ishandutta2007/Awesome-Data-Virtualization?style=social" alt="GitHub_Stars" /></a>
   <a href="https://github.com/ishandutta2007/Awesome-Data-Virtualization/fork"><img src="https://img.shields.io/github/forks/ishandutta2007/Awesome-Data-Virtualization?style=social" alt="GitHub Forks" /></a>
   <a href="https://github.com/ishandutta2007"><img alt="GitHub followers" src="https://img.shields.io/github/followers/ishandutta2007?label=Follow" /></a>
 </p>
@@ -55,9 +55,9 @@ The table below lists top enterprise data virtualization platforms sorted by com
 
 ## 🔓 Open-Source GitHub Projects
 
-Curated open-source query engines, federated SQL frameworks, and semantic layer engines sorted by GitHub Stars:
+Curated open-source query engines, federated SQL frameworks, and semantic layer engines sorted by GitHub_Stars:
 
-| Project | Description | GitHub Stars | License |
+| Project | Description | GitHub_Stars | License |
 | :--- | :--- | :--- | :--- |
 | 🦆 **[DuckDB](https://github.com/duckdb/duckdb)** | In-process analytical SQL database engine optimized for fast local compute, zero-copy querying, and cross-engine data federation. | [![Stars](https://img.shields.io/github/stars/duckdb/duckdb?style=social&color=white)](https://github.com/duckdb/duckdb/stargazers) | MIT |
 | 🧊 **[Cube Core](https://github.com/cube-js/cube)** | Headless BI and semantic layer platform exposing unified data models over REST, GraphQL, and SQL Postgres wire protocols. | [![Stars](https://img.shields.io/github/stars/cube-js/cube?style=social&color=white)](https://github.com/cube-js/cube/stargazers) | Apache-2.0 / MIT |
@@ -106,4 +106,4 @@ If you find this curated list valuable for your data engineering work or platfor
 
 - This is a **community-curated list** intended for educational and informational purposes — not an official endorsement.
 - Data Virtualization platforms handle sensitive enterprise infrastructure; always enforce strict data governance, access controls, and encryption standards.
-- Market valuations, star counts, and pricing models are subject to vendor adjustments and community updates.
+- Market valuations, Stars_Counts, and pricing models are subject to vendor adjustments and community updates.
